@@ -68,7 +68,7 @@ pipeline {
         stage('Build Docker PHP82') {
             steps {
                 sh """
-                    docker build -f Dockerfile.php82 -t ${IMAGE_NAME}:${IMAGE_VERSION}-php82 .
+                    docker build -f Dockerfile.php82 -t ${IMAGE_NAME}:${params.IMAGE_VERSION}-php82 .
                 """
             }
         }
@@ -76,7 +76,7 @@ pipeline {
         stage('Build Docker PHP83') {
             steps {
                 sh """
-                    docker build -f Dockerfile.php83 -t ${IMAGE_NAME}:${IMAGE_VERSION}-php83 .
+                    docker build -f Dockerfile.php83 -t ${IMAGE_NAME}:${params.IMAGE_VERSION}-php83 .
                 """
             }
         }
@@ -94,8 +94,8 @@ pipeline {
         stage('Push Images') {
             steps {
                 sh """
-                    docker push ${IMAGE_NAME}:${IMAGE_VERSION}-php82
-                    docker push ${IMAGE_NAME}:${IMAGE_VERSION}-php83
+                docker push ${IMAGE_NAME}:${params.IMAGE_VERSION}-php82
+                docker push ${IMAGE_NAME}:${params.IMAGE_VERSION}-php83
                 """
             }
         }
