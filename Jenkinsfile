@@ -21,7 +21,8 @@ pipeline {
 
     environment {
         DOCKERHUB_USER = 'raulcintas'
-        IMAGE_NAME = 'rcinpan963/app-ci-cintaspaniagua'REPORT_FILE = 'reports/test-report.txt'
+        IMAGE_NAME = 'rcinpan963/app-ci-cintaspaniagua'
+        REPORT_FILE = 'reports/test-report.txt'
     }
 
     stages {
