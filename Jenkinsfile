@@ -21,7 +21,7 @@ pipeline {
 
     environment {
         DOCKERHUB_USER = 'raulcintas'
-        IMAGE_NAME = 'app-ci-cintaspaniagua'
+        IMAGE_NAME = 'raulcintas/app-ci-cintaspaniagua'
         REPORT_FILE = 'reports/test-report.txt'
     }
 
