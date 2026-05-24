@@ -2,7 +2,7 @@
 
 function suma(int $a, int $b): int
 {
-    return $a - $b;
+    return $a + $b;
 }
 
 function estadoAplicacion(): string
