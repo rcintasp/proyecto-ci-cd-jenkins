@@ -1,0 +1,15 @@
+FROM php:8.3-apache
+
+LABEL maintainer="cintaspaniagua"
+
+ENV APP_ENV=production
+
+WORKDIR /var/www/html
+
+COPY src/ /var/www/html/
+
+VOLUME ["/var/www/html"]
+
+EXPOSE 80
+
+CMD ["apache2-foreground"]

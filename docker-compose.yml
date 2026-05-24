@@ -1,0 +1,19 @@
+services:
+  app-ci-cintaspaniagua:
+    build:
+      context: .
+      dockerfile: Dockerfile.php82
+    container_name: app-ci-cintaspaniagua
+    image: raulcintas/app-ci-cintaspaniagua:php82
+    ports:
+      - "8080:80"
+    environment:
+      APP_NAME: cintaspaniagua
+      APP_ENV: production
+    volumes:
+      - ./src:/var/www/html/src
+      - ./tests:/var/www/html/tests
+      - ./README.md:/var/www/html/README.md
+      - ./docs:/var/www/html/docs
+      - ./reports:/var/www/html/reports
+    restart: unless-stopped
