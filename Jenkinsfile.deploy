@@ -31,12 +31,14 @@ pipeline {
                 sshagent(credentials: ['ssh-server-key']) {
 
                     sh """
-                        ssh -o StrictHostKeyChecking=no ubuntu@51.77.147.161 '
-                        docker pull rcinpan963/app-ci-cintaspaniagua:latest-php82 &&
+                       docker pull rcinpan963/app-ci-cintaspaniagua:latest-php82 &&
                         docker rm -f app-ci-cintaspaniagua 2>/dev/null || true &&
                         docker run -d --name app-ci-cintaspaniagua -p 8082:80 rcinpan963/app-ci-cintaspaniagua:latest-php82 &&
-                        curl -f http://localhost:8082
-                        '
+                        for i in 1 2 3 4 5; do
+                        curl -f http://localhost:8082 && exit 0
+                        sleep 3
+                        done
+                        exit 1
                     """
                 }
             }
