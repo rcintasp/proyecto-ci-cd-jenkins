@@ -45,6 +45,7 @@ pipeline {
         stage('Unit Tests') {
             steps {
                 sh '''
+                    mkdir -p reports
                     set +e
                     php tests/test.php > "${REPORT_FILE}" 2>&1
                     status=$?
