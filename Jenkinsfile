@@ -14,7 +14,7 @@ pipeline {
         )
         string(
             name: 'RUN_DEPLOY',
-            defaultValue: 'false',
+            defaultValue: 'true',
             description: 'Valor true para disparar el job de despliegue'
         )
     }

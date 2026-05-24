@@ -10,17 +10,12 @@ SSH_HOST="${SSH_HOST:-}"
 SSH_USER="${SSH_USER:-}"
 SSH_PATH="${SSH_PATH:-/var/www/cintaspaniagua}"
 
-# 1. Análisis estático
-# Valida la sintaxis de los archivos PHP antes de compilar o probar.
 echo "[INFO] Ejecutando análisis estático..."
 php -l src/functions.php
 php -l src/index.php
 php -l tests/test.php
 
 echo "[INFO] Análisis estático completado."
-
-# 2. Ejecución de pruebas
-# Ejecuta la suite básica y guarda el resultado en el reporte.
 echo "[INFO] Ejecutando pruebas..."
 mkdir -p reports
 set +e
@@ -38,21 +33,16 @@ fi
 
 echo "[INFO] Pruebas completadas correctamente."
 
-# 3. Generación de reportes
-# Se deja el reporte de pruebas disponible en reports/test-report.txt.
 echo "[INFO] Reporte generado en ${REPORT_FILE}"
 cat "${REPORT_FILE}"
 
-# 4. Build Docker
-# Construye ambas imágenes PHP 8.2 y 8.3 para el proyecto cintaspaniagua.
 echo "[INFO] Construyendo imágenes Docker..."
 docker build -f Dockerfile.php82 -t "${IMAGE_NAME}:${IMAGE_VERSION}-php82" .
 docker build -f Dockerfile.php83 -t "${IMAGE_NAME}:${IMAGE_VERSION}-php83" .
 
 echo "[INFO] Imágenes Docker construidas."
 
-# 5. Push Docker Hub
-# Inicia sesión y sube las imágenes al repositorio de Docker Hub.
+
 echo "[INFO] Iniciando sesión en Docker Hub..."
 echo "${DOCKERHUB_PASSWORD}" | docker login -u "${DOCKERHUB_USER}" --password-stdin
 
@@ -62,8 +52,6 @@ docker push "${IMAGE_NAME}:${IMAGE_VERSION}-php83"
 
 echo "[INFO] Publicación completada."
 
-# 6. Despliegue SSH opcional
-# Si se proporcionan host y usuario, se copia el contenido al servidor remoto.
 if [[ -n "${SSH_HOST}" && -n "${SSH_USER}" ]]; then
   echo "[INFO] Desplegando por SSH en ${SSH_HOST}..."
   rsync -avz --delete \
